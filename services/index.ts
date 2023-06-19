@@ -1,6 +1,11 @@
 import Craft from "@/models/Craft"
 import axios from "axios"
 
+interface ICredentials {
+  email: string
+  password: string
+}
+
 class Services {
   http = axios.create({
     baseURL: process.env.apiUrl
@@ -8,7 +13,7 @@ class Services {
 
   async getCrafts() {
     try {
-      const response = await this.http.get<Craft[]>('/craft')
+      const response = await this.http.get<Craft[]>('/api/craft')
 
       return response.data
     } catch (error) {
@@ -16,6 +21,15 @@ class Services {
     }
   }
 
+  async login(credentials: ICredentials) {
+    try {
+      const response = await this.http.post('/login', credentials)
+
+      return response.data
+    } catch (error) {
+      console.log(error)
+    }
+  }
 }
 
 const service = new Services()

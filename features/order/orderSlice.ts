@@ -39,7 +39,7 @@ export const placeOrder = createAsyncThunk('order/placeOrder', (customerDetails:
   const state = store.getState()
 
   return http.post<IOrder>(
-    '/order',
+    '/api/order',
     {orderItems: state.orderSlice.cart, ...customerDetails},
     getHeaders()
   ).then(response => response.data)
