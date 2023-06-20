@@ -14,6 +14,8 @@ const options: ToastOptions<{}> | undefined = {
 const notify = (message: string, status: string = 'success') => {
   if (status === 'success') {
     toast.success(message, options);
+  } else if (status === 'warning') {
+    toast.warning(message, options);
   } else {
     toast.error(message, options);
   }

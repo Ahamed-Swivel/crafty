@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
+import { useSession } from 'next-auth/react'
 import Head from 'next/head'
 
 import { getCraftById, updateCraft } from '@/features/craft/craftSlice'
@@ -11,6 +12,7 @@ import notify from '@/helpers/toast'
 
 const UpdateCraft = () => {
   const router = useRouter()
+  const { data: session } = useSession()
 
   const dispatch = useAppDispatch()
   const craft = useAppSelector(state => state.craftSlice.selectedCraft)
@@ -19,6 +21,13 @@ const UpdateCraft = () => {
 
   const { empId } = router.query
   const id = empId as string
+
+  useEffect(() => {
+    if (!session) {
+      router.replace('/', undefined, { shallow: true })
+      notify("Unauthorized!", 'warning')
+    }
+  }, [])
 
   useEffect(() => {
     const getCraft = (id: string) => {
@@ -54,7 +63,7 @@ const UpdateCraft = () => {
       <main>
         {isLoading && <LoadingSpinner/>}
         {!craft && !isLoading && 'Craft not found'}
-        {!isLoading && craft && <ManageCraft craft={craft} onSubmit={update} />}
+        {!isLoading && craft && session && <ManageCraft craft={craft} onSubmit={update} />}
       </main>
     </>
   )

@@ -11,6 +11,7 @@ import Button from '@/components/atoms/Button';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { populateCraft } from '@/features/craft/craftSlice';
 import { useSession } from 'next-auth/react';
+import LoadingSpinner from '@/components/atoms/LoadingSpinner';
 
 interface Props {
   crafts: Craft[];
@@ -20,6 +21,7 @@ const HomePage: React.FC<Props> = ({ crafts }) => {
   const dispatch = useAppDispatch()
   const { data: session } = useSession()
   const craftsFromStore = useAppSelector(state => state.craftSlice.crafts)
+  const isLoading = useAppSelector(state => state.craftSlice.loading)
 
   useEffect(() => {
     dispatch(populateCraft(crafts))
@@ -27,6 +29,7 @@ const HomePage: React.FC<Props> = ({ crafts }) => {
 
   return (
     <Container className='mt-5 mb-5'>
+      {isLoading && <LoadingSpinner/>}
       <Row>
         <Col>
           <CartBadge/>

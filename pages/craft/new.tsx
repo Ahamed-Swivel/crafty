@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
+import { useSession } from 'next-auth/react'
 import Head from 'next/head'
 
 import { useAppDispatch, useAppSelector } from '@/app/hooks'
@@ -11,10 +12,18 @@ import notify from '@/helpers/toast'
 
 const NewCraft = () => {
   const router = useRouter()
+  const { data: session } = useSession()
 
   const dispatch = useAppDispatch()
   const isLoading = useAppSelector(state => state.craftSlice.loading)
   const error = useAppSelector(state => state.craftSlice.error)
+
+  useEffect(() => {
+    if (!session) {
+      router.replace('/', undefined, { shallow: true })
+      notify("Unauthorized!", 'warning')
+    }
+  }, [])
 
   useEffect(() => {
     if (error) {
@@ -39,7 +48,7 @@ const NewCraft = () => {
       </Head>
       <main>
         {isLoading && <LoadingSpinner/>}
-        <ManageCraft onSubmit={addCraft} />
+        {session && <ManageCraft onSubmit={addCraft} />}
       </main>
     </>
   )
