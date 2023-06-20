@@ -9,7 +9,7 @@ const CraftCards = ({ crafts }: CraftCardProps) => {
   return (
     <>
       {crafts.map((craft) => (
-        <CraftItem key={craft.id} craft={craft}/>
+        craft.status && <CraftItem key={craft.id} craft={craft}/>
       ))}
     </>
   )

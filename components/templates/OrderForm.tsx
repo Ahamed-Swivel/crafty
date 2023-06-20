@@ -1,20 +1,24 @@
 import { useEffect, useState } from 'react';
 import { Container, Form, Card, Row, Col } from 'react-bootstrap';
+import { useRouter } from 'next/router'
 
 import Button from '@/components/atoms/Button'
 import Input from '../atoms/Input';
-import validateOrder from '@/helpers/validateOrder';
+import { validateOrder } from '@/helpers/validateForms';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { placeOrder } from '@/features/order/orderSlice';
 import ICustomer from '@/models/Customer';
+import notify from '@/helpers/toast';
 
 const OrderForm = () => {
   const [validationResult, setValidationResult] = useState<string[]>([])
   const [isSubmitted, setIsSubmitted] = useState(false)
-
+  
+  const router = useRouter()
   const dispatch = useAppDispatch()
   const cart = useAppSelector(state => state.orderSlice.cart)
   const total = useAppSelector(state => state.orderSlice.totalOrder)
+  const error = useAppSelector(state => state.craftSlice.error)
 
   const [formData, setFormData] = useState<ICustomer>({
     customerName: '',
@@ -32,6 +36,12 @@ const OrderForm = () => {
     setFormData({ ...formData, [customerName]: value });
   };
 
+  useEffect(() => {
+    if (error) {
+      notify(`Failed! - ${error}`, 'error')
+    }
+  }, [error, router])
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitted(true)
@@ -40,9 +50,10 @@ const OrderForm = () => {
     if (errors.length === 0) {
       dispatch(placeOrder(formData))
       .then((response) => {
-        console.log(response);
-      }).catch(error => {
-        console.log(error)
+        if (response.payload) {
+          notify("Update successful!")
+          router.replace('/', undefined, { shallow: true })
+        }
       })
     }
   };
@@ -102,7 +113,7 @@ const OrderForm = () => {
               onChange={(value) => handleChange('contact', value)}
               isInvalid={isFormValid('contact')}
             />
-            <Button className="mt-2" variant="primary" type="submit">
+            <Button className="mt-2" variant="primary" type="submit" disabled={cart.length <= 0}>
               Place Order
             </Button>
           </Form>

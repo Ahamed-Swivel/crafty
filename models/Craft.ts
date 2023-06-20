@@ -1,8 +1,10 @@
-export default interface Craft {
-  id: string
+export default interface ICraft {
+  id?: string
   title: string
-  category: string
+  category?: string
   imageUrl: string
   price: number
-  description: string
+  description?: string
+  availableQuantity?: number
+  status?: boolean
 }
