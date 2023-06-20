@@ -1,9 +1,18 @@
 import Craft from "@/models/Craft"
 import axios from "axios"
 
+import { getHeaders } from "@/helpers/header"
+
 interface ICredentials {
   email: string
   password: string
+}
+
+interface ILoginResponse {
+  id: string
+  token: string
+  name: string
+  email: string
 }
 
 class Services {
@@ -23,7 +32,7 @@ class Services {
 
   async login(credentials: ICredentials) {
     try {
-      const response = await this.http.post('/login', credentials)
+      const response = await this.http.post<ILoginResponse>('/login', credentials)
 
       return response.data
     } catch (error) {

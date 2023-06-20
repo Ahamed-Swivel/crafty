@@ -56,7 +56,7 @@ const orderSlice = createSlice({
       if (searchIndex >= 0) {
         state.cart[searchIndex].quantity = state.cart[searchIndex].quantity + 1
       } else {
-        state.cart.push({
+        action.payload.id && state.cart.push({
           craftId: action.payload.id,
           quantity: action.payload.quantity,
           title: action.payload.title,
