@@ -1,5 +1,5 @@
 
-# Manage Employee FE
+# Craft selling app -FE
 
 A simple app to sell crafts with admin panel
 
