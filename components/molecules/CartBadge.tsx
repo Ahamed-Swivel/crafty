@@ -1,9 +1,9 @@
-import { Badge } from 'react-bootstrap';
+import { Badge } from 'react-bootstrap'
 import { FaShoppingCart } from 'react-icons/fa'
 import Link from 'next/link'
 
 import Button from '@/components/atoms/Button'
-import { useAppSelector } from '@/app/hooks';
+import { useAppSelector } from '@/app/hooks'
 
 const CartBadge: React.FC = () => {
   const totalOrder = useAppSelector(state => state.orderSlice.totalOrder)
@@ -16,7 +16,7 @@ const CartBadge: React.FC = () => {
         <Badge bg="primary">Checkout</Badge>
       </Button>
     </Link>
-  );
-};
+  )
+}
 
-export default CartBadge;
+export default CartBadge
