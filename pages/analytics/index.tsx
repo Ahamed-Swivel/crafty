@@ -1,14 +1,29 @@
 import { useEffect } from 'react';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/router'
 import { Col, Container, Row, Table } from 'react-bootstrap';
-import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
+import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import OrderSummary from '@/components/templates/OrderSummary';
 import { getAnalytics, getOrders } from '@/features/analytic/analyticSlice';
 import CraftItem from '@/components/molecules/CraftItem';
+import notify from '@/helpers/toast';
+import LoadingSpinner from '@/components/atoms/LoadingSpinner';
 
 const AnalyticsPage = () => {
+  const { data: session } = useSession()
+  const router = useRouter()
+  
   const analytics = useAppSelector(state => state.analyticSlice.analytics)
+  const isLoading = useAppSelector(state => state.analyticSlice.loading)
   const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    if (!session) {
+      router.replace('/', undefined, { shallow: true })
+      notify("Unauthorized!", 'warning')
+    }
+  }, [])
 
   useEffect(() => {
     dispatch(getAnalytics())
@@ -25,6 +40,7 @@ const AnalyticsPage = () => {
 
   return (
     <Container className='mt-4'>
+      {isLoading && <LoadingSpinner/>}
       <h1>Analytics</h1>
       <Row>
         <Col md={{ span: 11, offset: 1 }}>

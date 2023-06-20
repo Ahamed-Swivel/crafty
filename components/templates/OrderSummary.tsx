@@ -1,6 +1,5 @@
 
 import { useAppSelector } from '@/app/hooks';
-import { useState } from 'react';
 import { Accordion, Card, Container, Table } from 'react-bootstrap';
 
 const OrderSummary = () => {
