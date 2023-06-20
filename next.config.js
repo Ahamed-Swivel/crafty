@@ -3,6 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   env: {
     apiUrl: process.env.API_URL,
+    secret: process.env.SECRET,
   },
 }
 
