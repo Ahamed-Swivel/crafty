@@ -1,7 +1,6 @@
 import axios from 'axios'
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
 
-import ICraft from '@/models/Craft'
 import { getHeaders } from '@/helpers/header'
 import ICustomer from '@/models/Customer'
 

@@ -6,7 +6,6 @@ import Input from '@/components/atoms/Input'
 import Select from '@/components/atoms/Select'
 import ICraft from '@/models/Craft'
 import { validateCraft } from '@/helpers/validateForms'
-import notify from '@/helpers/toast';
 
 interface ICraftFormProps {
   onSubmit: (craft: ICraft) => void,
