@@ -4,6 +4,7 @@ import CraftCards from '@/components/templates/CraftCards';
 import Craft from '@/models/Craft'
 import CartBadge from '@/components/molecules/CartBadge';
 import service from '@/services';
+import LoginButton from '@/components/molecules/LoginButton';
 
 interface Props {
   crafts: Craft[];
@@ -12,6 +13,7 @@ interface Props {
 const HomePage: React.FC<Props> = ({ crafts }) => {
   return (
     <Container className='mt-5 mb-5'>
+      <LoginButton/>
       <CartBadge/>
       <Row>
         <CraftCards crafts={crafts} />
