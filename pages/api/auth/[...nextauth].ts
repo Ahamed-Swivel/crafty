@@ -16,7 +16,7 @@ const options: NextAuthOptions = {
     CredentialsProvider({
       name: "admin credential",
       credentials: {
-        email: { label: "Email", type: "email", placeholder: "Ahamed" },
+        email: { label: "Email", type: "email", placeholder: "ahamed@mail.com" },
         password: { label: "Password", type: "password" }
       },
       async authorize(credentials, req) {
