@@ -1,8 +1,6 @@
 import Craft from "@/models/Craft"
 import axios from "axios"
 
-import { getHeaders } from "@/helpers/header"
-
 interface ICredentials {
   email: string
   password: string
