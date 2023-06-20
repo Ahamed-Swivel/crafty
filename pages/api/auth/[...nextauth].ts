@@ -11,6 +11,7 @@ interface ILoginResponse {
 }
 
 const options: NextAuthOptions = {
+  secret: process.env.secret,
   providers: [
     CredentialsProvider({
       name: "admin credential",
