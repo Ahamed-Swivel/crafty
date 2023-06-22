@@ -1,19 +1,19 @@
-import { useEffect, useState } from 'react';
-import { Container, Form, Card, Row, Col } from 'react-bootstrap';
+import { useEffect, useState } from 'react'
+import { Container, Form, Card, Row, Col } from 'react-bootstrap'
 import { useRouter } from 'next/router'
 
 import Button from '@/components/atoms/Button'
-import Input from '../atoms/Input';
-import { validateOrder } from '@/helpers/validateForms';
-import { useAppDispatch, useAppSelector } from '@/app/hooks';
-import { placeOrder } from '@/features/order/orderSlice';
-import ICustomer from '@/models/Customer';
-import notify from '@/helpers/toast';
+import Input from '../atoms/Input'
+import { validateOrder } from '@/helpers/validateForms'
+import { useAppDispatch, useAppSelector } from '@/app/hooks'
+import { placeOrder } from '@/features/order/orderSlice'
+import ICustomer from '@/models/Customer'
+import notify from '@/helpers/toast'
 
 const OrderForm = () => {
   const [validationResult, setValidationResult] = useState<string[]>([])
   const [isSubmitted, setIsSubmitted] = useState(false)
-  
+
   const router = useRouter()
   const dispatch = useAppDispatch()
   const cart = useAppSelector(state => state.orderSlice.cart)
@@ -24,7 +24,7 @@ const OrderForm = () => {
     customerName: '',
     address: '',
     contact: '',
-  });
+  })
 
   useEffect(() => {
     const errors = validateOrder(formData)
@@ -33,8 +33,8 @@ const OrderForm = () => {
   }, [formData, isSubmitted])
 
   const handleChange = (customerName: string, value: string) => {
-    setFormData({ ...formData, [customerName]: value });
-  };
+    setFormData({ ...formData, [customerName]: value })
+  }
 
   useEffect(() => {
     if (error) {
@@ -43,7 +43,7 @@ const OrderForm = () => {
   }, [error, router])
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    e.preventDefault()
     setIsSubmitted(true)
     const errors = validateOrder(formData)
 
@@ -51,12 +51,12 @@ const OrderForm = () => {
       dispatch(placeOrder(formData))
       .then((response) => {
         if (response.payload) {
-          notify("Update successful!")
+          notify("Order placed successful!")
           router.replace('/', undefined, { shallow: true })
         }
       })
     }
-  };
+  }
 
   const isFormValid = (inputName: string): boolean =>
   !!validationResult.find(result => result === inputName)
@@ -120,7 +120,7 @@ const OrderForm = () => {
         </Col>
       </Row>
     </Container>
-  );
-};
+  )
+}
 
-export default OrderForm;
+export default OrderForm

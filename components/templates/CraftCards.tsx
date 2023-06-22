@@ -2,7 +2,7 @@ import CraftItem from '../molecules/CraftItem'
 import Craft from '@/models/Craft'
 
 interface CraftCardProps {
-  crafts: Craft[];
+  crafts: Craft[]
 }
 
 const CraftCards = ({ crafts }: CraftCardProps) => {

@@ -1,9 +1,9 @@
 import Modal from '@/components/molecules/Modal'
 
 interface DeleteModalProps {
-  isModalVisible: boolean;
-  onConfirm: () => void;
-  onCancel: () => void;
+  isModalVisible: boolean
+  onConfirm: () => void
+  onCancel: () => void
 }
 
 const DeleteModal = ({onConfirm, onCancel, isModalVisible}: DeleteModalProps) =>

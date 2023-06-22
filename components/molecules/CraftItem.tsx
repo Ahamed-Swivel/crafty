@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { Card, Col } from 'react-bootstrap'
-import { useSession } from 'next-auth/react';
+import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 
 import Craft from '@/models/Craft'
 import Button from '@/components/atoms/Button'
-import { addToCart } from '@/features/order/orderSlice';
-import { useAppDispatch, useAppSelector } from '@/app/hooks';
-import DeleteModal from '../templates/DeleteModal';
-import { removeCraft } from '@/features/craft/craftSlice';
-import notify from '@/helpers/toast';
+import { addToCart } from '@/features/order/orderSlice'
+import { useAppDispatch, useAppSelector } from '@/app/hooks'
+import DeleteModal from '../templates/DeleteModal'
+import { removeCraft } from '@/features/craft/craftSlice'
+import notify from '@/helpers/toast'
 
 interface Props {
   craft: Craft
