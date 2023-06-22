@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react'
 import { Button, Modal as BModal } from 'react-bootstrap'
 
-type VariantType = 'primary' | 'danger';
+type VariantType = 'primary' | 'danger'
 
 interface ConfirmationModalProps {
-  title: string;
-  message: string;
-  confirmBtnText: string;
-  isModalVisible: boolean;
+  title: string
+  message: string
+  confirmBtnText: string
+  isModalVisible: boolean
   variant: VariantType,
-  onConfirm: () => void;
-  onCancel: () => void;
+  onConfirm: () => void
+  onCancel: () => void
 }
 
 const Modal = ({ isModalVisible, title, message, confirmBtnText, variant='primary', onConfirm, onCancel }: ConfirmationModalProps) => {

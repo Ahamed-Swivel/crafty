@@ -1,3 +1,3 @@
-import ICustomer from "./Customer";
+import ICustomer from "./Customer"
 
 export default interface IOrder extends ICustomer {}

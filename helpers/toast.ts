@@ -1,4 +1,4 @@
-import { ToastOptions, toast } from "react-toastify";
+import { ToastOptions, toast } from "react-toastify"
 
 const options: ToastOptions<{}> | undefined = {
   position: "top-center",
@@ -13,11 +13,11 @@ const options: ToastOptions<{}> | undefined = {
 
 const notify = (message: string, status: string = 'success') => {
   if (status === 'success') {
-    toast.success(message, options);
+    toast.success(message, options)
   } else if (status === 'warning') {
-    toast.warning(message, options);
+    toast.warning(message, options)
   } else {
-    toast.error(message, options);
+    toast.error(message, options)
   }
 
 }

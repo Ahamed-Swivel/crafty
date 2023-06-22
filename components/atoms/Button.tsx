@@ -2,8 +2,8 @@ import { ButtonHTMLAttributes } from "react"
 import { Button as BootstrapButton } from 'react-bootstrap'
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "primary" | "secondary" | "danger";
-  customClass?: "";
+  variant?: "primary" | "secondary" | "danger"
+  customClass?: ""
 }
 
 const Button = ({

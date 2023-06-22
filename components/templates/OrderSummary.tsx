@@ -1,6 +1,6 @@
 
-import { useAppSelector } from '@/app/hooks';
-import { Accordion, Card, Container, Table } from 'react-bootstrap';
+import { useAppSelector } from '@/app/hooks'
+import { Accordion, Card, Container, Table } from 'react-bootstrap'
 
 const OrderSummary = () => {
   const orders = useAppSelector(state => state.analyticSlice.orders)
@@ -28,7 +28,7 @@ const OrderSummary = () => {
                     </thead>
                     <tbody>
                       {
-                        order.orderItems.map(item => 
+                        order.orderItems.map(item =>
                           <tr key={item.craftId}>
                             <td>{item.title}</td>
                             <td>{item.quantity}</td>
@@ -49,7 +49,7 @@ const OrderSummary = () => {
         ))}
       </Accordion>
     </Container>
-  );
-};
+  )
+}
 
 export default OrderSummary

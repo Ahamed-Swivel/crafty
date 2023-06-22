@@ -34,30 +34,30 @@ const validateCraft = ({
   const errors: string[] = []
 
   if (!title) {
-    errors.push('title');
+    errors.push('title')
   }
 
   if (!description) {
-    errors.push('description');
+    errors.push('description')
   }
 
   if (!category) {
-    errors.push('category');
+    errors.push('category')
   }
 
   if (price <= 0 || isNaN(price)) {
-    errors.push('price');
+    errors.push('price')
   }
 
   if (!imageUrl) {
-    errors.push('imageUrl');
+    errors.push('imageUrl')
   }
 
   if (!availableQuantity || isNaN(availableQuantity) || availableQuantity <= 0) {
-    errors.push('availableQuantity');
+    errors.push('availableQuantity')
   }
 
-  return errors;
+  return errors
 }
 
 export {validateOrder, validateCraft}

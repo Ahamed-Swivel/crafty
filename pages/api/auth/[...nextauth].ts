@@ -1,7 +1,7 @@
-import service from '@/services';
-import { NextApiRequest, NextApiResponse } from 'next';
-import NextAuth, { NextAuthOptions } from 'next-auth';
-import CredentialsProvider from "next-auth/providers/credentials";
+import service from '@/services'
+import { NextApiRequest, NextApiResponse } from 'next'
+import NextAuth, { NextAuthOptions } from 'next-auth'
+import CredentialsProvider from "next-auth/providers/credentials"
 
 interface ILoginResponse {
   id: string
@@ -52,5 +52,5 @@ const options: NextAuthOptions = {
 }
 
 
-const aNextAuth = (req: NextApiRequest, res: NextApiResponse) => NextAuth(req, res, options);
+const aNextAuth = (req: NextApiRequest, res: NextApiResponse) => NextAuth(req, res, options)
 export default aNextAuth
