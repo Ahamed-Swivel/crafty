@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { Card, Col } from 'react-bootstrap'
+import { Badge, Card, Col } from 'react-bootstrap'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 
@@ -22,13 +22,23 @@ const CraftItem: React.FC<Props> = ({ craft, isEditable = true }) => {
   const dispatch = useAppDispatch()
   const { data: session } = useSession()
   const error = useAppSelector(state => state.craftSlice.error)
+  const cart = useAppSelector(state => state.orderSlice.cart)
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false)
+  const [countOnCart, setCountOnCart] = useState<number>(0)
 
   useEffect(() => {
     if (error) {
       notify(`Failed! - ${error}`, 'error')
     }
   }, [error])
+
+  useEffect(() => {
+    const cartData = cart.find((item) =>
+      item.craftId === craft.id
+    )
+
+    setCountOnCart(cartData?.quantity ?? 0)
+  }, [cart, craft.id])
 
   const handleAddToCart = () => {
     dispatch(addToCart({...craft, quantity: 1}))
@@ -65,12 +75,14 @@ const CraftItem: React.FC<Props> = ({ craft, isEditable = true }) => {
           <Card.Body>
             <Card.Subtitle>{craft.category}</Card.Subtitle>
             <Card.Title>{craft.title}</Card.Title>
-            <Card.Text>Rs {craft.price}</Card.Text>
+            <Card.Text>Rs {craft.price.toFixed(2)}</Card.Text>
             {
               isEditable &&
               craft?.availableQuantity &&
               craft?.availableQuantity > 0 &&
-              <Button variant='secondary' onClick={handleAddToCart}>Add to Cart</Button>
+              countOnCart < craft?.availableQuantity
+                ? <Button variant='secondary' onClick={handleAddToCart}>Add to Cart</Button>
+                : <Badge bg="secondary">Out of stock</Badge>
             }
           </Card.Body>
           {
